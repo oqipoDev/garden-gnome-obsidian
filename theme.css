@@ -365,7 +365,7 @@ button.kanban-plugin__new-item-button:hover {
 	justify-content: center;
 	gap: var(--size-2-1);
 }
-.BC-matrix-buttons > button.svelte-barhym {
+.BC-matrix-buttons > button:not(.workaround) {
 	/* Copied from .clickable-icon */
 	margin: 0;
 	padding: var(--size-2-2) var(--size-2-3);
@@ -379,51 +379,53 @@ button.kanban-plugin__new-item-button:hover {
 	box-shadow: none;
 	font-size: var(--icon-size);
 }
-.BC-matrix-buttons > button.svelte-barhym:hover {
+.BC-matrix-buttons > button:hover {
 	/* Copied from .clickable-icon:hover */
 	opacity: var(--icon-opacity-hover);
 	color: var(--icon-color-hover);
 	background-color: var(--background-modifier-hover);
 }
-/* Imitate Outgoing Links' style*/
-.BC-Matrix.svelte-1p44ezg.svelte-1p44ezg {
-	padding: 0;
-}
-div.BC-Matrix.svelte-1p44ezg > div.svelte-1p44ezg {
+
+/* BC Matrix imitates Outgoing Links' style*/
+
+/* This level of specificity is just dumb */
+/* Still better than "div.BC-Matrix.svelte-1p44ezg > div.svelte-1p44ezg" */
+div.BC-Matrix > div.BC-matrix-hier:not(.workaround) {
 	border: none;
 	margin: 0;
 }
-div.BC-Matrix-square.svelte-1p44ezg.svelte-1p44ezg {
+/* More dumb specificity */
+.BC-matrix-hier div.BC-Matrix-square:not(.workaround) {
 	border: none;
 }
-.BC-Matrix-header.svelte-1p44ezg {
+.BC-Matrix-header {
 	font-size: 1em;
 	font-weight: normal;
 }
-h4.BC-Matrix-header.svelte-1p44ezg.svelte-1p44ezg,
-h6.BC-Matrix-header.svelte-1p44ezg.svelte-1p44ezg {
+.BC-Matrix-headers h4.BC-Matrix-header:not(.workaround),
+.BC-Matrix-headers h6.BC-Matrix-header:not(.workaround) {
 	padding: 0 var(--size-4-1);
 	pointer-events: none;
 }
-h6.BC-Matrix-header.svelte-1p44ezg.svelte-1p44ezg {
+h6.BC-Matrix-header {
 	font-weight: normal;
 	color: var(--text-faint);
 }
-.BC-Matrix-square:hover h6.BC-Matrix-header.svelte-1p44ezg.svelte-1p44ezg {
+.BC-Matrix-square:hover h6.BC-Matrix-header {
 	color: var(--text-muted);
 }
-ol > li.svelte-1p44ezg {
+.BC-Matrix-square ol > li {
 	padding: 0;
 	margin: var(--size-2-1) 0;
 	border-radius: var(--radius-s);
 }
-li.svelte-1p44ezg > div {
+.BC-Matrix-square li > div {
 	padding: var(--size-2-1) 0;
 }
-li.svelte-1p44ezg::marker {
+.BC-Matrix-square li > div::marker {
 	color: var(--text-faint);
 }
-ol > li.svelte-1p44ezg:hover {
+.BC-Matrix-square li:hover {
 	background-color: var(--nav-item-background-hover);
 	font-weight: var(--nav-item-weight-hover);
 }
