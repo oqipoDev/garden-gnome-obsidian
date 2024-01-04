@@ -1186,14 +1186,14 @@ input[type='search']:active {
 
 /* Dropdowns */
 .dropdown {
-	background-color: transparent;
+	background-color: var(--background-hover);
 	transition: var(--button-transition);
 }
 .dropdown:hover {
-	background-color: var(--background-hover);
+	background-color: var(--background-active);
 }
 .dropdown:active {
-	background-color: var(--background-active);
+	background-color: var(--background-hover);
 }
 
 /* Themes*/
