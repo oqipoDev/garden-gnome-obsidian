@@ -951,13 +951,13 @@ a {
 	padding: 0;
 	border-bottom-width: 1px;
 }
-.mod-root .workspace-tab-header-container-inner {
+.mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header-container-inner {
 	/* Fullwidth tabs */
 	width: 100%;
 	margin: 0;
 	padding: var(--size-2-3);
 }
-.workspace .mod-root .workspace-tab-header {
+.mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header {
 	min-width: 12ch;
 	max-width: none;
 	margin: 0 var(--size-2-1);
@@ -970,15 +970,18 @@ a {
 	/* Add subtle animation */
 	transition: var(--button-transition);
 }
+/* Tab colours */
 .mod-root .workspace-tab-header:hover,
 .mod-left-split .workspace-tab-header:hover,
-.mod-right-split .workspace-tab-header:hover {
+.mod-right-split .workspace-tab-header:hover,
+.workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container .workspace-tab-header:hover .workspace-tab-header-inner {
 	color: var(--text-normal);
 	background-color: var(--background-hover);
 }
 .mod-root .workspace-tab-header:active,
 .mod-left-split .workspace-tab-header:active,
-.mod-right-split .workspace-tab-header:active {
+.mod-right-split .workspace-tab-header:active,
+.workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container .workspace-tab-header:active .workspace-tab-header-inner {
 	background-color: var(--background-active);
 }
 .mod-root .workspace-tab-header.is-active,
@@ -996,6 +999,15 @@ a {
 .mod-right-split .workspace-tab-header.is-active:active {
 	background-color: var(--background-double-active);
 }
+.workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container .workspace-tab-header.is-active .workspace-tab-header-inner {
+	background-color: var(--background-hover);
+}
+/* STACKED TABS */
+.workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container .workspace-tab-header-inner {
+	box-shadow: #0004 -4px 0 8px;
+	width: auto;
+}
+
 .workspace-split.mod-root .workspace-tab-header.is-active::before,
 .workspace-split.mod-root .workspace-tab-header.is-active::after
 {
@@ -1030,21 +1042,16 @@ a {
 .workspace-tab-header-inner-title {
 	text-align: center;
 }
-/*Text disappears near x symbol*/
-.mod-root .workspace-tab-header.is-active .workspace-tab-header-inner-title {
-	background: linear-gradient(to left, transparent 4ch, var(--tab-text-color-active) 6ch);
-	background-clip: text; /* Stops VSCode from throwing warnings */
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-}
-.mod-root .workspace-tab-header:hover .workspace-tab-header-inner-title {
+/*Text disappears near x symbol, only on non-stacked */
+.workspace-tabs:not(.mod-stacked) .workspace-tab-header.is-active	.workspace-tab-header-inner-title,
+.workspace-tabs:not(.mod-stacked) .workspace-tab-header:hover		.workspace-tab-header-inner-title {
 	background: linear-gradient(to left, transparent 4ch, var(--tab-text-color-active) 6ch);
 	background-clip: text; /* Stops VSCode from throwing warnings */
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 /* Close tab button */
-.workspace .mod-root .workspace-tab-header .workspace-tab-header-inner-close-button {
+.mod-root .workspace-tabs:not(.mod-stacked) .workspace-tab-header .workspace-tab-header-inner-close-button {
 	/* Detach and overlay */
 	position: absolute;
 	right: var(--size-4-2);
@@ -1056,7 +1063,8 @@ a {
 	z-index: 20;
 }
 .workspace-tab-header-inner-close-button:hover,
-.workspace-tab-header-inner-close-button:active {
+.workspace-tab-header-inner-close-button:active,
+.workspace .mod-root .workspace-tabs.mod-stacked .workspace-tab-container .workspace-tab-header-inner-close-button:hover {
 	background-color: var(--background-active);
 }
 
