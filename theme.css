@@ -560,6 +560,7 @@ body {
 	--input-font-weight: bold;
 	--icon-color: var(--text-normal);
 	--code-background: var(--background-secondary);
+	--blockquote-background-color: var(--background-secondary);
 	
 	/* TODO add customization */
 	--accent-h: 213 !important;
@@ -583,7 +584,9 @@ body {
 	--rounded-corner-frame: 12px;
 	--rounded-corner-element: 6px;
 	--shadow-frame: #0002 0 2px 6px;
-	--padding-frame: var(--size-4-2) var(--size-4-3);
+	--padding-frame-h: var(--size-4-3);
+	--padding-frame-v: var(--size-4-2);
+	--padding-frame: var(--padding-frame-v) var(--padding-frame-h);
 	--button-transition: linear 100ms background-color;
 
 	/* Settings */
@@ -749,15 +752,31 @@ a {
 
 /* BLOCKQUOTES / EMBEDS */
 
-.markdown-rendered blockquote,
-.HyperMD-quote, .markdown-embed {
-	background-color: var(--background-secondary);
-}
-
 .markdown-rendered blockquote, .markdown-embed {
 	border-radius: var(--rounded-corner-frame);
 	padding: var(--padding-frame);
 	box-shadow: var(--shadow-frame);
+}
+/* Source mode quote */
+.HyperMD-quote {
+	background-color: var(--blockquote-background-color);
+}
+/* Live preview quote */
+.markdown-source-view.is-live-preview .HyperMD-quote {
+	padding-left: var(--padding-frame-h);
+	padding-right: var(--padding-frame-h);
+}
+.markdown-source-view.is-live-preview .HyperMD-quote:first-of-type,
+.markdown-source-view.is-live-preview :not(.HyperMD-quote) + .HyperMD-quote {
+	border-start-start-radius: var(--rounded-corner-frame);
+	border-start-end-radius: var(--rounded-corner-frame);
+	padding-top: var(--padding-frame-v);
+}
+.markdown-source-view.is-live-preview .HyperMD-quote:last-of-type,
+.markdown-source-view.is-live-preview .HyperMD-quote:has(+ :not(.HyperMD-quote)) {
+	border-end-start-radius: var(--rounded-corner-frame);
+	border-end-end-radius: var(--rounded-corner-frame);
+	padding-bottom: var(--padding-frame-v);
 }
 
 .markdown-embed:not(:hover) > .embed-title,
