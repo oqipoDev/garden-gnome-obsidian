@@ -41,6 +41,22 @@ settings:
 Code common to all of oqipo's themes
 */
 
+body {
+	--callout-padding: var(--size-4-3) var(--size-4-3) var(--size-4-3) 24px;
+	--file-header-font-weight: 600;
+	--embed-max-height: 80vh;
+
+	/* LESS visible */
+	--collapse-icon-color: var(--text-muted);
+	--collapse-icon-color-collapsed: var(--text-faint);
+	/* MORE visible */
+	--list-marker-color: var(--text-muted);
+}
+
+/*
+			MARKDOWN
+*/
+
 /* Header */
 .mod-header {
 	margin-bottom: var(--inline-title-margin-bottom);
@@ -194,14 +210,20 @@ Code common to all of oqipo's themes
 
 /* NAVIGATION */
 
-.nav-folder-title {
-	--nav-item-weight: 600;
-	--nav-item-weight-hover: 700;
-}
 .nav-folder-title:hover {
 	/* Brighten up expand caret */
 	--nav-collapse-icon-color: var(--text-muted);
 	--nav-collapse-icon-color-collapsed: var(--text-muted);
+}
+.nav-folder-title::before {
+	/* Little folder icon */
+	box-sizing: border-box;
+	content: "";
+	margin: auto 0.5ch auto 0;
+	border: solid var(--nav-item-color);
+	border-width: 0 0 7px 5px;
+	height: 9px;
+	width: 9px;
 }
 .search-result:not(.is-collapsed) .search-result-file-title {
 	color: var(--text-muted);
@@ -291,17 +313,36 @@ Code common to all of oqipo's themes
 }
 
 /* KANBAN PLUGIN */
-
 .kanban-plugin {
 	box-shadow: inset var(--text-faint) 0 2px 4px -2px;
-	background-color: var(--background-primary-alt);
+	background-color: var(--background-primary);
+	/* Board-like background */
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' class='canvas-background'%3E%3Cpattern id='35de6af6ca2a9ae1' patternUnits='userSpaceOnUse' x='302.5' y='300.6' width='20' height='20'%3E%3Ccircle cx='0.7' cy='0.7' r='0.7' fill='%238884'%3E%3C/circle%3E%3C/pattern%3E%3Crect x='0' y='0' width='100%25' height='100%25' fill='url(%2335de6af6ca2a9ae1)'%3E%3C/rect%3E%3C/svg%3E");
+}
+.kanban-plugin__lane {
+	background-color: var(--background-primary);
+	border: solid rgb(var(--canvas-color)) 2px;
+}
+.kanban-plugin__lane-header-wrapper,
+.kanban-plugin__item-button-wrapper {
+	border: none;
+}
+.kanban-plugin__lane-items > .kanban-plugin__item-wrapper {
+	margin-top: 6px;
+}
+.kanban-plugin__item {
+	border: none;
+}
+.kanban-plugin__item-title-wrapper {
+	background-color: var(--background-secondary);
+	padding: 0.5em 1ch;
 }
 /* Make the "New item" button consistent */
 button.kanban-plugin__new-item-button {
 	background-color: var(--interactive-normal);
 }
 button.kanban-plugin__new-item-button:hover {
-	background-color: var(--interactive-normal);
+	background-color: var(--interactive-hover);
 	color: var(--text-normal);
 	box-shadow: var(--input-shadow-hover);
 }
@@ -464,18 +505,9 @@ h6.BC-Matrix-header {
 	--text-nav-selected: var(--nav-item-color);
 	cursor: pointer;
 }
-.has-folder-note::before {
-	/* Little folder icon */
-	box-sizing: border-box;
-	content: "";
-	margin: auto 0.5ch auto 0;
-	border: solid var(--nav-item-color);
-	border-width: 0 0 6px 5px;
-	height: 8px;
-	width: 9px;
-}
 
 /* ICON SHORTCODES PLUGIN */
+
 .isc-icon>img, .isc-icon>svg {
 	/* Undo forced cursor */
 	cursor: inherit !important;
@@ -539,7 +571,7 @@ body {
 	--purple-1-rgb: 220, 138, 221; --purple-2-rgb: 192,  97, 203; --purple-3-rgb: 145,  65, 172; --purple-4-rgb: 129,  61, 156; --purple-5-rgb:  97,  53, 131;
 	 --brown-1-rgb: 205, 171, 143;  --brown-2-rgb: 181, 131,  90;  --brown-3-rgb: 152, 106,  68;  --brown-4-rgb: 134,  94,  60;  --brown-5-rgb:  99,  69,  44;
 
-  /* Obsidian default*/
+	/* Obsidian default*/
 	--font-interface: system-ui; /* Da native feel B) */
 
 	--blockquote-border-thickness: 0; 
@@ -547,6 +579,8 @@ body {
 	/*--modal-border-width: 0; /*Out border*/
 	--modal-border-color: var(--background-secondary-alt);
 	--tab-outline-color: var(--background-secondary); /* Title bar */
+	--nav-indentation-guide-width: 0;
+	--nav-collapse-icon-color: var(--text-muted);
 
 	--nav-item-padding: var(--size-2-3);
 	--callout-padding: var(--size-4-3) var(--size-4-4);
@@ -556,7 +590,7 @@ body {
 
 	--input-shadow: none !important; /* Flat buttons */
 	--input-shadow-hover: none !important;
-    --input-height: 36px;
+	--input-height: 36px;
 	--input-font-weight: bold;
 	--icon-color: var(--text-normal);
 	--code-background: var(--background-secondary);
@@ -579,6 +613,8 @@ body {
 	--header-height: 44px;
 
 	--background-modifier-hover: #8883;
+	--interactive-normal: var(--background-hover);
+	--interactive-hover: var(--background-active);
 
 	/* Custom */
 	--rounded-corner-frame: 12px;
@@ -869,6 +905,12 @@ a {
 .tree-item.nav-file, .has-folder-note {
 	--cursor: pointer;
 }
+.collapse-icon svg.svg-icon {
+	stroke-width: 0px;
+	width: 12px;
+	height: 12px;
+	fill: var(--nav-collapse-icon-color);
+}
 
 .tree-item-self {
 	margin: 0;
@@ -1150,6 +1192,7 @@ body:not(.native-scrollbars) .modal-close-button {
 .horizontal-tab-nav-item:active, .vertical-tab-nav-item:active,
 .horizontal-tab-nav-item.is-active, .vertical-tab-nav-item.is-active  {
 	background-color: var(--background-active);
+	color: var(--text-normal);
 	/* Fix vestigial accent */
 	/*color: var(--text-normal);/*discarded 23/12/12*/
 }
@@ -1188,15 +1231,9 @@ body:not(.native-scrollbars) .modal-close-button {
 
 .setting-item-control > button, button {
 	padding: var(--size-4-4) var(--size-4-6);
-	background-color: var(--background-active);
+/* 	background-color: var(--background-active); */
 	
 	transition: var(--button-transition);
-}
-button:hover { 
-	background-color: var(--background-active-hover);
-}
-button:active {
-	background-color: var(--background-double-active);
 }
 button.mod-cta {
 	background-color: var(--blue-3);
@@ -1215,14 +1252,7 @@ input[type='search']:active {
 
 /* Dropdowns */
 .dropdown {
-	background-color: var(--background-hover);
 	transition: var(--button-transition);
-}
-.dropdown:hover {
-	background-color: var(--background-active);
-}
-.dropdown:active {
-	background-color: var(--background-hover);
 }
 
 /* Themes*/
